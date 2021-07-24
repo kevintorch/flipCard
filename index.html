@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sonsie+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        :root {
+            --myWidth: 70px;
+            --myHeight: 100px;
+            --borderRadius: 7px;
+        }
+
+        .root,
+        .root0 {
+            display: flex;
+            justify-content: center;
+
+            border-radius: var(--borderRadius);
+            width: 100%;
+        }
+
+        .root2 {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            border-radius: var(--borderRadius);
+        }
+
+        .box {
+            width: var(--myWidth);
+            height: var(--myHeight);
+            background-color: antiquewhite;
+            perspective: 600px;
+            border-radius: var(--borderRadius);
+            background-image: url(back2.jpg);
+            background-size: contain;
+        }
+
+        .box0 {
+            width: var(--myWidth);
+            height: var(--myHeight);
+            background-color: antiquewhite;
+            perspective: 600px;
+
+            border-radius: var(--borderRadius);
+
+        }
+
+        .boxA,
+        .boxB {
+            width: var(--myWidth);
+            height: var(--myHeight);
+            background-color: antiquewhite;
+            perspective: 600px;
+            border-radius: var(--borderRadius);
+
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: var(--borderRadius);
+            transform-style: preserve-3d;
+        }
+
+
+
+        .front,
+        .back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: white;
+            color: blueviolet;
+            backface-visibility: hidden;
+            border-radius: var(--borderRadius);
+            font-family: 'Sonsie One', cursive;
+
+
+        }
+
+
+
+        .back {
+            color: white;
+            background-color: rgb(255, 248, 203);
+
+            transform: rotateY(180deg);
+            border-radius: var(--borderRadius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+
+        }
+
+        .rboxes {
+            background-color: red;
+            border-radius: var(--borderRadius);
+        }
+
+        .cardType span {
+            font-size: 61px;
+            line-height: .5;
+        }
+
+        .boxA {
+            background-image: url(ander.jpg);
+            background-size: contain;
+            /* background-repeat: no-repeat; */
+            background-position: center;
+
+        }
+
+        .boxB {
+            background-image: url(bahar.jpg);
+            background-size: contain;
+
+            /* background-repeat: no-repeat; */
+            background-position: center;
+        }
+
+        .cardType {
+            text-align: center;
+        }
+
+        /* .resultboxsa .mycard:last-child {
+            width: var(--myWidth);
+            height: var(--myHeight);
+            display: flex;
+            justify-content: center;
+            font-size: 39px;
+            background: rgb(255, 248, 203);
+            border-radius: 7px;
+            flex-direction: column;
+            ;
+            align-items: center;
+            font-family: 'Sonsie One', cursive;
+
+        } */
+    </style>
+</head>
+
+<body>
+
+    <div class="root0">
+        <div class="box0">
+
+        </div>
+    </div>
+    <div class="root">
+        <div class="box" style="z-index: 10;">
+
+        </div>
+    </div>
+    <div class="root2">
+        <div class="boxA rboxes">
+
+            <div class="resultboxsa" style="position: absolute;
+            bottom: 0;">
+
+            </div>
+
+        </div>
+        <div class="boxB rboxes">
+            <div class="resultboxsb" style="position: absolute;
+            bottom: 0;">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+    var result = 7;
+    card = [7];
+    cardType = ["spades", "clubs", "hearts", "diams"];
+    totalcard = ['7spades'];
+    finalcard = [{
+        number: "7",
+        color: "spades",
+    }];
+
+    function randomIntFromInterval(min, max) { // min and max included 
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    var total_card = randomIntFromInterval(4, 14);
+    for (let i = 0; i < total_card; i++) {
+        r = randomIntFromInterval(1, 13);
+        cr = randomIntFromInterval(0, 3);
+        color = cardType[cr]
+        if (totalcard.includes(`${r}${color}`) || result == r) {
+            if (i != 0) i--;
+        } else {
+            totalcard.push(`${r}${color}`);
+            finalcard.push({
+                number: `${r}`,
+                color: `${color}`,
+            });
+            card.push(r);
+
+        }
+
+    }
+    var myi = 0;
+    while (myi < 1) {
+        r = result;
+        cr = randomIntFromInterval(0, 3);
+        color = cardType[cr]
+        if (totalcard.includes(`${r}${color}`)) {
+
+        } else {
+            totalcard.push(`${r}${color}`);
+            finalcard.push({
+                number: `${r}`,
+                color: `${color}`,
+            });
+            card.push(r);
+            myi++;
+        }
+
+    }
+
+
+
+    cardTypeColor = { "spades": "darkblue", "clubs": "darkblue", "hearts": "red", "diams": "red" };
+    a = [];
+    b = [];
+    var width = $(document).width();
+
+    var position = $('.box').position();
+    var ptop = position.top;
+    var pleft = position.left;
+
+    var positionf = $('.box0').position();
+    var topf = positionf.top - ptop;
+    var leftf = positionf.left - pleft;
+
+
+    var positionA = $('.boxA').position();
+    var topA = positionA.top - ptop;
+    var leftA = positionA.left - pleft;
+
+    var positionB = $('.boxB').position();
+    var topB = positionB.top - ptop;
+    var leftB = positionB.left - pleft;
+
+    var ran;
+    var durations = 400;
+
+
+
+    firstMove();
+    var changeFlag = true;
+    var num = 0;
+    function firstMove() {
+        ran = Math.floor(Math.random() * 4);
+        if (num == undefined)
+            boxStart();
+
+        else {
+            if (changeFlag) {
+                boxA();
+                changeFlag = !changeFlag;
+            } else {
+                boxB();
+                changeFlag = !changeFlag;
+            }
+        }
+        num++;
+    }
+
+    function commanBox(con) {
+        return `<div class="content ${con}" id="content">
+<div class="front" style='border-radius: var(--borderRadius);
+            background-image: url(back2.jpg);
+            background-size: contain;'>
+
+</div>
+<div class="back">
+<section class="cardNumber" style="text-align: center;color:${cardTypeColor[finalcard[0].color]}">${finalcard[0].number}</section>
+<section class="cardType"><span style="color:${cardTypeColor[finalcard[0].color]}">&${finalcard[0].color};</span></section>
+</div>
+</div>`;
+    }
+    function commanBox2() {
+        return `<div class="mycards" style=" width: var(--myWidth);
+            height: var(--myHeight);
+            display: flex;
+            justify-content: center;
+            font-size: 39px;
+            background: rgb(255, 248, 203);
+            border-radius: 7px;
+            flex-direction: column;
+            box-shadow:0 0 5px #000;
+            align-items: center;
+            font-family: 'Sonsie One', cursive;">
+
+
+<div class="mycard">
+    <section class="cardNumber" style="text-align: center;color:${cardTypeColor[finalcard[0].color]}">${finalcard[0].number}</section>
+<section class="cardType"><span style="color:${cardTypeColor[finalcard[0].color]}">&${finalcard[0].color};</span></section>
+
+</div>
+</div>`;
+    }
+
+    function boxStart() {
+
+        if (card.length > 0) {
+
+            var con = `content${num}`;
+            $(".box").append(commanBox(con));
+
+            $(`.${con}`).animate(
+                {
+
+                    deg: 180,
+
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+
+                        $(this).css({ transform: 'rotateY(' + now + 'deg)' });
+
+                    },
+                    complete: function () {
+                    }
+                },
+            ).animate(
+
+                {
+                    top: topf,
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+                        $(this).css({ top: now + 'px' });
+                    },
+                    complete: function () {
+                        card.shift();
+                        finalcard.shift();
+                        firstMove();
+                    }
+                },
+            );
+        }
+
+    }
+
+    // Box A and Box Postion and set 
+    function boxA() {
+
+        if (card.length > 0) {
+            var con = `content${num}`;
+
+            $(".box").append(commanBox(con));
+
+            $(`.${con}`).animate(
+                {
+
+                    deg: 180,
+
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+
+                        $(this).css({ transform: 'rotateY(' + now + 'deg)' });
+
+                    },
+                    complete: function () {
+                    }
+                },
+            ).animate(
+
+                {
+                    top: topA,
+                    left: leftA,
+
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+
+                        if (fx.prop == 'top') {
+                            // console.log(`Toop ${fx.prop} ${now}`);
+
+                            $(this).css({ top: now + 'px' });
+                        }
+                        if (fx.prop == 'left') {
+                            // console.log(`Left ${fx.prop} ${now}`);
+
+                            $(this).css({ left: now + 'px' });
+                        }
+                    },
+                    complete: function () {
+
+                        $(this).remove();
+                        $(".resultboxsa .cardType").remove();
+                        $(".resultboxsa .mycards").css({
+
+                            "height": "var(--myHeight)/2",
+                            "marginBottom": "-8px",
+                            "fontSize": "16px",
+                            "paddingBottom": "9px",
+
+                        });
+
+                        $(".resultboxsa").append(commanBox2);
+                        card.shift();
+                        finalcard.shift();
+                        firstMove();
+                    }
+                },
+            );
+        }
+
+    }
+
+    function boxB() {
+
+        if (card.length > 0) {
+            var con = `content${num}`;
+            $(".box").append(commanBox(con));
+
+            $(`.${con}`).animate(
+                {
+
+                    deg: 180,
+
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+
+                        $(this).css({ transform: 'rotateY(' + now + 'deg)' });
+
+                    },
+                    complete: function () {
+                    }
+                },
+            ).animate(
+
+                {
+                    top: topB,
+                    left: leftB,
+
+                },
+                {
+                    duration: durations,
+                    step: function (now, fx) {
+
+                        if (fx.prop == 'top') {
+                            //console.log(`Toop ${fx.prop} ${now}`);
+
+                            $(this).css({ top: now + 'px' });
+                        }
+                        if (fx.prop == 'left') {
+                            // console.log(`Left ${fx.prop} ${now}`);
+
+                            $(this).css({ left: now + 'px' });
+                        }
+                    },
+                    complete: function () {
+                        $(this).remove();
+                        $(".resultboxsb .cardType").remove();
+                        $(".resultboxsb .mycards").css({
+
+                            "height": "var(--myHeight)/2",
+                            "marginBottom": "-8px",
+                            "fontSize": "16px",
+                            "paddingBottom": "9px",
+
+                        });
+
+                        $(".resultboxsb").append(commanBox2());
+                        card.shift();
+                        finalcard.shift();
+                        firstMove();
+                    }
+                },
+            );
+        }
+
+    }
+
+    function moveCard() {
+        $(".box").append(`
+    <div class="content" id="content">
+            <div class="front">
+                <h1>Front</h1>
+            </div>
+            <div class="back">
+                <h1>${card[0]}</h1>
+            </div>
+        </div>`);
+
+        $('.content').animate(
+            { deg: 180 },
+            {
+                duration: 600,
+                step: function (now) {
+                    $(this).css({ transform: 'rotateY(' + now + 'deg)' });
+                },
+                complete: function () {
+                    card.shift();
+                    $(".box").html('');
+                    if (card.length > 0) {
+                        postionChange();
+                    }
+                }
+            },
+        );
+
+    }
+
+</script>
