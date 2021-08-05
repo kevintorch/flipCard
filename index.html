@@ -17,7 +17,7 @@
             --borderRadius: 7px;
         }
 
-        .rootf,
+        .rootff,
         .root0 {
             display: flex;
             justify-content: center;
@@ -33,7 +33,7 @@
             border-radius: var(--borderRadius);
         }
 
-        .boxf {
+        .boxff {
             width: var(--myWidth);
             height: var(--myHeight);
             background-color: antiquewhite;
@@ -157,8 +157,8 @@
 
         </div>
     </div>
-    <div class="rootf">
-        <div class="boxf" style="z-index: 10;">
+    <div class="rootff">
+        <div class="boxff" style="z-index: 10;">
 
         </div>
     </div>
@@ -244,7 +244,7 @@
 
     var width = $(document).width();
 
-    var position = $('.box').position();
+    var position = $('.boxff').position();
     var ptop = position.top;
     var pleft = position.left;
 
@@ -326,7 +326,7 @@
         if (card.length > 0) {
 
             var con = `content${num}`;
-            $(".box").append(commanBox(con));
+            $(".boxff").append(commanBox(con));
 
             $(`.${con}`).animate(
                 {
@@ -371,7 +371,7 @@
         if (card.length > 0) {
             var con = `content${num}`;
 
-            $(".box").append(commanBox(con));
+            $(".boxff").append(commanBox(con));
 
             $(`.${con}`).animate(
                 {
@@ -439,7 +439,7 @@
 
         if (card.length > 0) {
             var con = `content${num}`;
-            $(".box").append(commanBox(con));
+            $(".boxff").append(commanBox(con));
 
             $(`.${con}`).animate(
                 {
